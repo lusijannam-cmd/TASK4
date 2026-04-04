@@ -6,21 +6,26 @@ public class Main {
         HardwareRepository repo = new HardwareRepository();
         ArrayList<Hardware> list = repo.getAllHardware();
 
-        int laptop16 = 0;
-        int laptop32 = 0;
-        int phone50 = 0;
+        System.out.println("=== Hardware Masterlist ===\n");
 
-        System.out.println("=== Hardware Masterlist ===");
+        System.out.printf("%-3s %-20s %-5s %-10s %-25s\n",
+                "ID", "Brand", "Spec", "Type", "Expected Interpretation");
+
+        System.out.println("--------------------------------------------------------------------------");
+
+        int laptop16 = 0, laptop32 = 0, phone50 = 0;
 
         for (Hardware h : list) {
 
-            System.out.println(
-                h.getBrand() + " " +
-                h.getModel() + " (" +
-                h.getType() + ") - " +
-                h.interpretSpec()
+            System.out.printf("%-3d %-20s %-5d %-10s %-25s\n",
+                    h.getId(),
+                    h.getBrand(),
+                    h.getSpec(),
+                    h.getType(),
+                    h.interpretSpec()
             );
 
+            // Polymorphic counting
             if (h instanceof Laptop) {
                 if (h.getSpec() == 16) laptop16++;
                 if (h.getSpec() == 32) laptop32++;
